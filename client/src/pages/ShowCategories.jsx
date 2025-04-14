@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 function ShowCategories() {
   return (
     <div>
-                  <Navbar />
+      <Navbar />
 
     </div>
   )

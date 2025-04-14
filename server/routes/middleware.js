@@ -4,7 +4,7 @@ const result = require('../utils/result.js')
 
 
 function authorization(request, response, next) {
-    if (request.url == '/users/register' || request.url == '/users/login') {
+    if (request.url == '/users/register' || request.url == '/users/login' || request.url == '/categories/showcategories' || request.url == `/blogs/allblogs`) {
         next();
     }
     else {

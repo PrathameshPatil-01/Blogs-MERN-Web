@@ -15,7 +15,7 @@ router.post('/addcategory', (request, response) => {
     });
 })
 
-router.get('/showcategory', (request, response) => {
+router.get('/showcategories', (request, response) => {
     const statement = `SELECT id,title,description FROM categories`;
     db.query(statement, (error, data) => {
         console.log(data);

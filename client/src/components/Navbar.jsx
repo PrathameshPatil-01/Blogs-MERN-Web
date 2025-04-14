@@ -5,7 +5,7 @@ function Navbar() {
     // const user = JSON.parse(sessionStorage.getItem('user'));
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+            <nav className="navbar navbar-expand-lg navbar-light bg-primary sticky-top">
                 <Link className="navbar-brand" to="/home">BLOGG</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@ function Navbar() {
                             <Link className="nav-link" to="/addblog">Add Blog</Link>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-danger">Logout</button>
+                    <button type="button" className="btn btn-danger">Logout</button>
                     </div>
             </nav>
         </>
