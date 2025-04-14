@@ -60,3 +60,23 @@ export const getMyBlogs = async () => {
         console.log('Error in myblogs', err);
     }
 }
+
+export const deleteBlog = async (blog_id) => {
+    try {
+        const url = `${config.serverURL}/blogs/allblogs/${blog_id}`;
+
+        // get the token
+        const user = JSON.parse(sessionStorage.getItem('user'));
+
+        const response = await axios.delete(url, {
+            headers: {
+                token: user.token, // sending the token here
+            },
+        });
+
+        return response.data;
+    }
+    catch (err) {
+        console.log('Error in deleteblogs', err);
+    }
+}

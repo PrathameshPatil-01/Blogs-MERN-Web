@@ -1,8 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import {config} from '../services/config';
 
 function Navbar() {
-    // const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const profile_img = `${config.serverURL}/${user.profile_picture}`
+    const navigate = useNavigate()
+
+    const onLogout = () => {
+      // clear the token and user name from session storage
+      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('name')
+  
+      // navigate to the login screen
+      navigate('/')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-primary sticky-top">
@@ -34,8 +46,11 @@ function Navbar() {
                             <Link className="nav-link" to="/addblog">Add Blog</Link>
                         </li>
                     </ul>
-                    <button type="button" className="btn btn-danger">Logout</button>
+                    <div className="text-center">
+                        <img src={profile_img} className="rounded" alt="..." />
                     </div>
+                    <button onClick={onLogout} type="button" className="btn btn-danger">Logout</button>
+                </div>
             </nav>
         </>
     )

@@ -22,11 +22,11 @@ router.post('/login', (request, response) => {
     const { email, password } = request.body;
     const encryptedPassword = CryptoJS.SHA256(password).toString();
 
-    const statement = `SELECT id,first_name,last_name,email,password_hash,mobile_no FROM users WHERE email=? and password_hash = ?`;
+    const statement = `SELECT id,first_name,last_name,email,password_hash,mobile_no,profile_picture FROM users WHERE email=? and password_hash = ?`;
     const values = [email, encryptedPassword];
     db.query(statement, values, (error, data) => {
         console.log(data);
-        
+
         if (data) {
             if (data.length) {
                 const user = data[0];

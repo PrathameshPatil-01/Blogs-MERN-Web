@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { getMyBlogs } from '../services/blog'
+import { deleteBlog, getMyBlogs } from '../services/blog'
 import { toast } from 'react-toastify';
 
 function MyBlogs() {
@@ -23,7 +23,20 @@ function MyBlogs() {
     else {
       toast.error(result.error.sqlMessage)
     }
+  }
 
+  const onDelete = async (blog_id) => {
+    const result = await deleteBlog(blog_id);
+    console.log(result);
+
+    if (result['status'] == 'success') {
+      console.log("blog deleted succesfully");
+      toast.success("blog deleted succesfully")
+      blogList();
+    }
+    else {
+      toast.error(result.error.sqlMessage)
+    }
   }
 
   function timeAgo(date) {
@@ -56,13 +69,18 @@ function MyBlogs() {
         {blogs && blogs.map((blog) => {
           return (
             <div className="card border-info m-3 mx-auto" style={{ width: "70%" }} key={blog.id}>
-              <div className="card-header">{blog.category_id}</div>
+              <div className="card-header d-flex justify-content-between">
+                <button className='btn btn-secondary rounded'>{blog.category_title}</button>
+                <span><pre>{blog.first_name} {blog.last_name}</pre></span>
+                <button className='btn btn-outline-info'>Edit</button>
+              </div>
               <div className="card-body blog-cards ">
                 <h5 className="card-title">{blog.title}</h5>
                 <p className="card-text">{blog.contents}</p>
               </div>
-              <div className="card-footer" style={{ backgroundColor: "lightgrey" }}>
-                <large className="text-body-secondary d-flex justify-content-end">Updated {timeAgo(blog.updated_at)}</large>
+              <div className="card-footer  d-flex justify-content-between align-items-center" style={{ backgroundColor: "lightgrey" }}>
+                <small className="text-body-secondary">Updated {timeAgo(blog.updated_at)}</small>
+                <button className='btn btn-danger' onClick={() => { onDelete(blog.id) }}>Delete</button>
               </div>
             </div>
           )

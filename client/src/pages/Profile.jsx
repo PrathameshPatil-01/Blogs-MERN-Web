@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { updateUser } from '../services/user'
 import 'react-toastify/dist/ReactToastify.css'
@@ -16,7 +16,16 @@ function Profile() {
     bio: '',
   })
 
-  const [profile_picture, set_profile_picture] = useState('')
+  const [profile_picture, set_profile_picture] = useState(null)
+  const [image, setImage] = useState(null)
+
+  // create the image url when user selects a photo
+  useEffect(() => {
+    if (profile_picture) {
+      // create an image from the file selected
+      setImage(URL.createObjectURL(profile_picture))
+    }
+  }, [profile_picture])
 
   const onSave = async () => {
     const { first_name, last_name } = userInfo;
@@ -59,16 +68,29 @@ function Profile() {
           <div className='col'>
             <div className='update-column'>
               <div className='container update-container p-4'>
-                <div className='my-4 d-flex justify-content-center'>
+                <div className='my-2 d-flex justify-content-center'>
                   <h2 className=''>Update Profile</h2>
                 </div>
-                <div className='col'>
-                  <label htmlFor=''>Photo</label>
-                  <input
-                    onChange={(e) => set_profile_picture(e.target.files[0])}
-                    type='file'
-                    className='form-control'
-                  />
+                <div className='d-flex justify-content-between'>
+                  <div className=''>
+                    <label htmlFor=''>Photo</label>
+                    <input
+                      onChange={(e) => {
+                        set_profile_picture(e.target.files[0])
+                      }}
+                      type='file'
+                      className='form-control'
+                    />
+                  </div>
+                  <div className="text-center">
+                    {image && (
+                      <img
+                        className=""
+                        src={image}
+                        style={{ width: 100, height: 100 }}
+                      />
+                    )}
+                  </div>
                 </div>
                 <div className="">
                   <label htmlFor='first_name'>First Name</label>

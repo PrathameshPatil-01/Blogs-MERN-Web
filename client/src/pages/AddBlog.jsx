@@ -42,7 +42,10 @@ function AddBlog() {
   return (
     <div>
       <Navbar />
-      <div className='container'>
+      <div className='container mt-4'>
+      <div className='mb-4'>
+          <h3>Add Category</h3>
+        </div>
         <div className="mb-3">
           <label className="form-label">Blog Title</label>
           <input
@@ -73,8 +76,8 @@ function AddBlog() {
             </select>
           </div>
         </div>
-        <div className="d-block">
-          <button onClick={onAdd} className="btn btn-primary" type="button">Save Blog</button>
+        <div className="d-flex justify-content-end">
+          <button onClick={onAdd} className="btn btn-success" type="button">Save Blog</button>
         </div>
       </div>
     </div>

@@ -42,7 +42,10 @@ function AddCategory() {
   return (
     <div>
       <Navbar />
-      <div className='container'>
+      <div className='container mt-4'>
+        <div className='mb-4'>
+          <h3>Add Category</h3>
+        </div>
         <div className="mb-3">
           <label className="form-label">Category Title</label>
           <input
@@ -53,14 +56,14 @@ function AddCategory() {
         </div>
         <div className="mb-3">
           <label className="form-label">Category Description</label>
-          <textarea
+          <textarea rows={7}
             onChange={(e) => {
               setCategory({ ...category, description: e.target.value })
             }}
             className="form-control" id="description" placeholder="Add description" />
         </div>
-        <div className="d-block">
-          <button onClick={onAdd} className="btn btn-primary" type="button">Add Category</button>
+        <div className="d-flex justify-content-end">
+          <button onClick={onAdd} className="btn btn-success" type="button">Add Category</button>
         </div>
       </div>
     </div>
