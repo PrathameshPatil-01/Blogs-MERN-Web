@@ -34,8 +34,8 @@ function Navbar() {
                             <Link className="nav-link" to="/addblog">Add Blog</Link>
                         </li>
                     </ul>
-                    <button type='submit' className='btn btn-danger'></button>
-                </div>
+                    <button type="button" class="btn btn-danger">Logout</button>
+                    </div>
             </nav>
         </>
     )
